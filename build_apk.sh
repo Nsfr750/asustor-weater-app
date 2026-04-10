@@ -18,6 +18,10 @@ echo ""
 rm -rf "${BUILD_DIR}"
 mkdir -p "${BUILD_DIR}/${APP_NAME}"
 
+# Update version in apkg.xml to match version.py
+echo "Updating apkg.xml version to ${VERSION}..."
+sed -i "s|<version>.*</version>|<version>${VERSION}</version>|" apkg.xml
+
 # Copy all necessary files
 echo "Copying files..."
 cp -r app.py requirements.txt version.py \
@@ -33,16 +37,27 @@ chmod +x "${BUILD_DIR}/${APP_NAME}/uninstall.sh"
 chmod +x "${BUILD_DIR}/${APP_NAME}/start.sh"
 chmod +x "${BUILD_DIR}/${APP_NAME}/stop.sh"
 
-# Create icon placeholder if not exists
-if [ ! -f "icon.png" ]; then
-    echo "Creating icon placeholder..."
-    # Create a simple 128x128 icon using ImageMagick if available
-    if command -v convert &> /dev/null; then
-        convert -size 128x128 xc:steelblue -pointsize 30 -fill white \
-                -gravity center -annotate +0+0 "☁️" "${BUILD_DIR}/${APP_NAME}/icon.png"
-    else
-        touch "${BUILD_DIR}/${APP_NAME}/icon.png"
-    fi
+# Create icon.png if not exists (required by ASUSTOR)
+echo "Creating icon.png..."
+if command -v convert &> /dev/null; then
+    # Create a proper 128x128 icon using ImageMagick
+    convert -size 128x128 xc:steelblue -pointsize 60 -fill white \
+            -gravity center -annotate +0+0 "☁" "${BUILD_DIR}/${APP_NAME}/icon.png"
+else
+    # Create minimal valid PNG placeholder (base64 encoded 1x1 transparent PNG)
+    echo "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==" | base64 -d > "${BUILD_DIR}/${APP_NAME}/icon.png"
+fi
+
+# Create screenshot.png placeholder (required by ASUSTOR apkg.xml)
+echo "Creating screenshot.png..."
+if command -v convert &> /dev/null; then
+    # Create a 800x600 screenshot placeholder
+    convert -size 800x600 xc:lightblue -pointsize 40 -fill steelblue \
+            -gravity center -annotate +0+0 "Weather App\nScreenshot" \
+            "${BUILD_DIR}/${APP_NAME}/screenshot.png"
+else
+    # Create minimal valid PNG placeholder
+    echo "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==" | base64 -d > "${BUILD_DIR}/${APP_NAME}/screenshot.png"
 fi
 
 # Create the APK archive
