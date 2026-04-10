@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meteo ASUSTOR</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>☁️ Meteo ASUSTOR</h1>
+            <p class="subtitle">Lockerstor 6604T Weather Station</p>
+        </header>
+
+        <div class="search-section">
+            <div class="search-box">
+                <input type="text" id="cityInput" placeholder="Inserisci città (es. Roma, Milano, Napoli)" value="Roma">
+                <button id="searchBtn">🔍 Cerca</button>
+            </div>
+            <p class="api-help">
+                <small>ℹ️ Dati forniti da <a href="https://open-meteo.com" target="_blank">Open-Meteo</a> - API gratuita senza registrazione</small>
+            </p>
+        </div>
+
+        <div id="loading" class="loading hidden">
+            <div class="spinner"></div>
+            <p>Caricamento dati meteo...</p>
+        </div>
+
+        <div id="error" class="error hidden"></div>
+
+        <div id="weatherContainer" class="weather-container hidden">
+            <div class="current-weather">
+                <h2>Condizioni Attuali</h2>
+                <div class="location">
+                    <span id="cityName"></span>, <span id="countryCode"></span>
+                    <span id="timestamp" class="timestamp"></span>
+                </div>
+                
+                <div class="weather-main">
+                    <img id="weatherIcon" src="" alt="Weather icon">
+                    <div class="temperature">
+                        <span id="temperature"></span>°C
+                    </div>
+                    <div class="description" id="description"></div>
+                </div>
+
+                <div class="weather-details">
+                    <div class="detail-box">
+                        <span class="label">Percepita</span>
+                        <span class="value"><span id="feelsLike"></span>°C</span>
+                    </div>
+                    <div class="detail-box">
+                        <span class="label">Umidità</span>
+                        <span class="value"><span id="humidity"></span>%</span>
+                    </div>
+                    <div class="detail-box">
+                        <span class="label">Pressione</span>
+                        <span class="value"><span id="pressure"></span> hPa</span>
+                    </div>
+                    <div class="detail-box">
+                        <span class="label">Vento</span>
+                        <span class="value"><span id="windSpeed"></span> m/s</span>
+                    </div>
+                    <div class="detail-box">
+                        <span class="label">Nuvolosità</span>
+                        <span class="value"><span id="clouds"></span>%</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="forecast-section">
+                <h2>Previsioni 5 Giorni</h2>
+                <div id="forecastContainer" class="forecast-container"></div>
+            </div>
+        </div>
+
+        <footer>
+            <p>© Copyright 2024-2026 Nsfr750 - All rights reserved.</p>
+            <p>Powered by Open-Meteo API | Designed for ASUSTOR NAS</p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>

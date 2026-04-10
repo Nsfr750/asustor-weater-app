@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    ASUSTOR App Package Configuration
+    Weather App for ASUSTOR NAS Lockerstor 6604T
+    © Copyright 2024-2026 Nsfr750 - All rights reserved.
+    Licensed under GPLv3
+-->
+<package>
+    <name>WeatherApp</name>
+    <internalName>weather-app</internalName>
+    <version>1.0.0</version>
+    <description>Applicazione meteo per ASUSTOR NAS - Visualizza condizioni meteo e previsioni</description>
+    <descriptionLang>
+        <lang>en</lang>
+        <description>Weather application for ASUSTOR NAS - Display weather conditions and forecasts</description>
+    </descriptionLang>
+    <descriptionLang>
+        <lang>it</lang>
+        <description>Applicazione meteo per ASUSTOR NAS - Visualizza condizioni meteo e previsioni</description>
+    </descriptionLang>
+    <author>Nsfr750 - Tuxxle</author>
+    <maintainer>Nsfr750</maintainer>
+    <email>nsfr750@yandex.com</email>
+    <website>https://www.tuxxle.org</website>
+    <license>GPLv3</license>
+    <category>tools</category>
+    <type>python</type>
+    <architecture>any</architecture>
+    <firmware>4.0.0</firmware>
+    <port>8000</port>
+    <webui>
+        <protocol>http</protocol>
+        <port>8000</port>
+        <url>/</url>
+    </webui>
+    <entrypoint>
+        <command>python3</command>
+        <script>app.py</script>
+    </entrypoint>
+    <prerequisites>
+        <python3>3.8</python3>
+    </prerequisites>
+    <icon>icon.png</icon>
+    <screenshot>screenshot.png</screenshot>
+</package>
