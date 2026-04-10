@@ -48,18 +48,6 @@ else
     echo "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==" | base64 -d > "${BUILD_DIR}/${APP_NAME}/icon.png"
 fi
 
-# Create screenshot.png placeholder (required by ASUSTOR apkg.xml)
-echo "Creating screenshot.png..."
-if command -v convert &> /dev/null; then
-    # Create a 800x600 screenshot placeholder
-    convert -size 800x600 xc:lightblue -pointsize 40 -fill steelblue \
-            -gravity center -annotate +0+0 "Weather App\nScreenshot" \
-            "${BUILD_DIR}/${APP_NAME}/screenshot.png"
-else
-    # Create minimal valid PNG placeholder
-    echo "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==" | base64 -d > "${BUILD_DIR}/${APP_NAME}/screenshot.png"
-fi
-
 # Create the APK archive
 echo "Creating APK package..."
 cd "${BUILD_DIR}"
