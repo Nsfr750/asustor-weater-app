@@ -86,7 +86,48 @@ asustor-weather-app/
 └── LICENSE               # Licenza GPLv3
 ```
 
-## 🔧 Requisiti
+## � Creazione del pacchetto APK
+
+Per creare il file `.apk` installabile su ASUSTOR NAS:
+
+### Prerequisiti
+
+- Linux/macOS/WSL con Bash
+- Python 3.8+
+- tar (installato di default sulla maggior parte dei sistemi)
+
+### Procedura
+
+1. Clona il repository:
+
+   ```bash
+   git clone https://github.com/Nsfr750/asustor-weather-app.git
+   cd asustor-weather-app
+   ```
+
+2. Esegui lo script di build:
+
+   ```bash
+   bash build_apk.sh
+   ```
+
+3. Lo script eseguirà automaticamente:
+   - Lettura della versione da `version.py`
+   - Creazione della directory di build
+   - Copia di tutti i file necessari
+   - Impostazione dei permessi di esecuzione
+   - Creazione dell'archivio `.apk` (formato tar.gz)
+
+4. Al termine troverai il file `weather-app-{versione}.apk` nella directory principale.
+
+### Installazione del pacchetto
+
+1. Apri **App Central** sul tuo ASUSTOR NAS
+2. Clicca su **"Installazione manuale"**
+3. Seleziona il file `.apk` generato
+4. Segui la procedura guidata
+
+## �🔧 Requisiti
 
 - ASUSTOR NAS con ADM 4.0+
 - Python 3.8+
