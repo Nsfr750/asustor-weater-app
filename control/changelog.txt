@@ -10,6 +10,8 @@
 - **Grafici storici**: temperatura (max/media/min), umidità, pressione, vento
 - **Andamento orario** ultime 24 ore con doppio asse
 - **Card riepilogative** con statistiche di sintesi
+- **Supporto multilingua IT/EN** con selettore lingua nel menu
+- **Sistema di internazionalizzazione** completo (i18n)
 - Selettore periodo: 7, 30, 90 giorni o 1 anno
 - Menu navigazione tra Home e Statistiche
 - API endpoint per dati statistici (`/api/stats/*`)
@@ -19,6 +21,10 @@
 
 - Compatibilità ADM estesa dalla 2.0+ (precedentemente 4.0+)
 - Rimosso requisito screenshot da `apkg.xml` per ADM 2.0
+- Struttura APK: file divisi in CONTROL/ e data/ (formato ASUSTOR standard)
+- Aggiunte icone enable/disable per visualizzazione desktop ADM
+- Installazione automatica con avvio app al termine
+- Script install.sh migliorato per copia file in root app
 
 ## [1.0.0] - 2026-04-10
 

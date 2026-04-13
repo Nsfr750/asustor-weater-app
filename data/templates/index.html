@@ -3,41 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meteo ASUSTOR</title>
+    <title id="pageTitle">Meteo ASUSTOR</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>☁️ Meteo ASUSTOR</h1>
-            <p class="subtitle">Lockerstor - Weather Station</p>
+            <h1>☁️ <span data-i18n="app_title">Meteo ASUSTOR</span></h1>
+            <p class="subtitle" data-i18n="app_subtitle">Lockerstor - Weather Station</p>
         </header>
 
         <nav class="nav-menu">
-            <a href="/" class="nav-link active">🏠 Home</a>
-            <a href="/stats" class="nav-link">📊 Statistiche</a>
+            <div class="nav-links">
+                <a href="/" class="nav-link active" data-i18n="nav_home">🏠 Home</a>
+                <a href="/stats" class="nav-link" data-i18n="nav_stats">📊 Statistiche</a>
+            </div>
+            <div class="language-selector">
+                <select id="languageSelect" title="Seleziona lingua">
+                    <option value="it">🇮🇹 IT</option>
+                    <option value="en">🇬🇧 EN</option>
+                </select>
+            </div>
         </nav>
 
         <div class="search-section">
             <div class="search-box">
-                <input type="text" id="cityInput" placeholder="Inserisci città (es. Roma, Milano, Napoli)" value="Roma">
-                <button id="searchBtn">🔍 Cerca</button>
+                <input type="text" id="cityInput" placeholder="Inserisci città (es. Roma, Milano, Napoli)" value="Roma" data-i18n-placeholder="search_placeholder">
+                <button id="searchBtn" data-i18n="search_button">🔍 Cerca</button>
             </div>
             <p class="api-help">
-                <small>ℹ️ Dati forniti da <a href="https://open-meteo.com" target="_blank">Open-Meteo</a></small>
+                <small>ℹ️ <span data-i18n="api_info">Dati forniti da</span> <a href="https://open-meteo.com" target="_blank">Open-Meteo</a></small>
             </p>
         </div>
 
         <div id="loading" class="loading hidden">
             <div class="spinner"></div>
-            <p>Caricamento dati meteo...</p>
+            <p data-i18n="loading">Caricamento dati meteo...</p>
         </div>
 
         <div id="error" class="error hidden"></div>
 
         <div id="weatherContainer" class="weather-container hidden">
             <div class="current-weather">
-                <h2>Condizioni Attuali</h2>
+                <h2 data-i18n="current_weather">Condizioni Attuali</h2>
                 <div class="location">
                     <span id="cityName"></span>, <span id="countryCode"></span>
                     <span id="timestamp" class="timestamp"></span>
@@ -53,30 +61,30 @@
 
                 <div class="weather-details">
                     <div class="detail-box">
-                        <span class="label">Percepita</span>
+                        <span class="label" data-i18n="feels_like">Percepita</span>
                         <span class="value"><span id="feelsLike"></span>°C</span>
                     </div>
                     <div class="detail-box">
-                        <span class="label">Umidità</span>
+                        <span class="label" data-i18n="humidity">Umidità</span>
                         <span class="value"><span id="humidity"></span>%</span>
                     </div>
                     <div class="detail-box">
-                        <span class="label">Pressione</span>
+                        <span class="label" data-i18n="pressure">Pressione</span>
                         <span class="value"><span id="pressure"></span> hPa</span>
                     </div>
                     <div class="detail-box">
-                        <span class="label">Vento</span>
+                        <span class="label" data-i18n="wind">Vento</span>
                         <span class="value"><span id="windSpeed"></span> m/s</span>
                     </div>
                     <div class="detail-box">
-                        <span class="label">Nuvolosità</span>
+                        <span class="label" data-i18n="cloudiness">Nuvolosità</span>
                         <span class="value"><span id="clouds"></span>%</span>
                     </div>
                 </div>
             </div>
 
             <div class="forecast-section">
-                <h2>Previsioni 5 Giorni</h2>
+                <h2 data-i18n="forecast_5days">Previsioni 5 Giorni</h2>
                 <div id="forecastContainer" class="forecast-container"></div>
             </div>
         </div>
@@ -88,5 +96,6 @@
     </div>
 
     <script src="{{ url_for('static', filename='app.js') }}"></script>
+    <script src="{{ url_for('static', filename='i18n.js') }}"></script>
 </body>
 </html>

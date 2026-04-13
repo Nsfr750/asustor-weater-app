@@ -3,38 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Statistiche Meteo - ASUSTOR</title>
+    <title id="pageTitle">Statistiche Meteo - ASUSTOR</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>📊 Statistiche Meteo</h1>
-            <p class="subtitle">Dati storici e grafici</p>
+            <h1>📊 <span data-i18n="stats_title">Statistiche Meteo</span></h1>
+            <p class="subtitle" data-i18n="stats_subtitle">Dati storici e grafici</p>
         </header>
 
         <nav class="nav-menu">
-            <a href="/" class="nav-link">🏠 Home</a>
-            <a href="/stats" class="nav-link active">📊 Statistiche</a>
+            <div class="nav-links">
+                <a href="/" class="nav-link" data-i18n="nav_home">🏠 Home</a>
+                <a href="/stats" class="nav-link active" data-i18n="nav_stats">📊 Statistiche</a>
+            </div>
+            <div class="language-selector">
+                <select id="languageSelect" title="Seleziona lingua">
+                    <option value="it">🇮🇹 IT</option>
+                    <option value="en">🇬🇧 EN</option>
+                </select>
+            </div>
         </nav>
 
         <div class="search-section">
             <div class="search-box">
-                <input type="text" id="cityInput" placeholder="Inserisci città (es. Roma, Milano, Napoli)" value="Roma">
+                <input type="text" id="cityInput" placeholder="Inserisci città (es. Roma, Milano, Napoli)" value="Roma" data-i18n-placeholder="search_placeholder">
                 <select id="daysSelect">
-                    <option value="7">Ultimi 7 giorni</option>
-                    <option value="30" selected>Ultimi 30 giorni</option>
-                    <option value="90">Ultimi 3 mesi</option>
-                    <option value="365">Ultimo anno</option>
+                    <option value="7" data-i18n="stats_7days">Ultimi 7 giorni</option>
+                    <option value="30" selected data-i18n="stats_30days">Ultimi 30 giorni</option>
+                    <option value="90" data-i18n="stats_90days">Ultimi 3 mesi</option>
+                    <option value="365" data-i18n="stats_365days">Ultimo anno</option>
                 </select>
-                <button id="searchBtn">🔍 Aggiorna</button>
+                <button id="searchBtn" data-i18n="search_button">🔍 Aggiorna</button>
             </div>
         </div>
 
         <div id="loading" class="loading hidden">
             <div class="spinner"></div>
-            <p>Caricamento statistiche...</p>
+            <p data-i18n="loading">Caricamento statistiche...</p>
         </div>
 
         <div id="error" class="error hidden"></div>
@@ -42,58 +50,58 @@
         <div id="statsContainer" class="stats-container hidden">
             <div class="summary-cards">
                 <div class="summary-card">
-                    <h3>Temperatura Media</h3>
+                    <h3 data-i18n="stats_avg_temp">Temperatura Media</h3>
                     <p class="value" id="avgTemp">-</p>
-                    <p class="unit">°C</p>
+                    <p class="unit" data-i18n="unit_celsius">°C</p>
                 </div>
                 <div class="summary-card">
-                    <h3>Temperatura Max</h3>
+                    <h3 data-i18n="stats_max_temp">Temperatura Max</h3>
                     <p class="value" id="maxTemp">-</p>
-                    <p class="unit">°C</p>
+                    <p class="unit" data-i18n="unit_celsius">°C</p>
                 </div>
                 <div class="summary-card">
-                    <h3>Temperatura Min</h3>
+                    <h3 data-i18n="stats_min_temp">Temperatura Min</h3>
                     <p class="value" id="minTemp">-</p>
-                    <p class="unit">°C</p>
+                    <p class="unit" data-i18n="unit_celsius">°C</p>
                 </div>
                 <div class="summary-card">
-                    <h3>Giorni Archiviati</h3>
+                    <h3 data-i18n="stats_days_count">Giorni Archiviati</h3>
                     <p class="value" id="daysCount">-</p>
-                    <p class="unit">giorni</p>
+                    <p class="unit" data-i18n="days">giorni</p>
                 </div>
             </div>
 
             <div class="charts-grid">
                 <div class="chart-container">
-                    <h2>Andamento Temperature</h2>
+                    <h2 data-i18n="stats_temp_trend">Andamento Temperature</h2>
                     <canvas id="tempChart"></canvas>
                 </div>
 
                 <div class="chart-container">
-                    <h2>Umidità Media</h2>
+                    <h2 data-i18n="stats_humidity">Umidità Media</h2>
                     <canvas id="humidityChart"></canvas>
                 </div>
 
                 <div class="chart-container">
-                    <h2>Pressione Atmosferica</h2>
+                    <h2 data-i18n="stats_pressure">Pressione Atmosferica</h2>
                     <canvas id="pressureChart"></canvas>
                 </div>
 
                 <div class="chart-container">
-                    <h2>Velocità del Vento</h2>
+                    <h2 data-i18n="stats_wind">Velocità del Vento</h2>
                     <canvas id="windChart"></canvas>
                 </div>
             </div>
 
             <div class="chart-container full-width">
-                <h2>Andamento Orario (Ultime 24 ore)</h2>
+                <h2 data-i18n="stats_hourly">Andamento Orario (Ultime 24 ore)</h2>
                 <canvas id="hourlyChart"></canvas>
             </div>
         </div>
 
         <div id="noData" class="no-data hidden">
-            <p>Nessun dato disponibile per questa città.</p>
-            <p>Cerca il meteo dalla pagina principale per iniziare a raccogliere dati.</p>
+            <p data-i18n="no_data">Nessun dato disponibile per questa città.</p>
+            <p data-i18n="no_data_hint">Cerca il meteo dalla pagina principale per iniziare a raccogliere dati.</p>
         </div>
 
         <footer>
@@ -103,5 +111,6 @@
     </div>
 
     <script src="{{ url_for('static', filename='stats.js') }}"></script>
+    <script src="{{ url_for('static', filename='i18n.js') }}"></script>
 </body>
 </html>

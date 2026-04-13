@@ -1,3 +1,11 @@
-Weather application for ASUSTOR NAS - Display weather conditions and forecasts
+Weather App for ASUSTOR NAS - Current weather and 5-day forecasts
 
-http://nas-ip:8000/
+Features:
+- Real-time weather data from Open-Meteo API
+- 5-day weather forecasts with min/max temperatures
+- Historical statistics with interactive charts
+- SQLite database for weather data storage
+- Multi-language support (IT/EN)
+- Web interface at http://nas-ip:8000/
+
+Version: 1.1.0 | ADM 2.0+

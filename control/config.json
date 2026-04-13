@@ -24,7 +24,9 @@
         "description": "Applicazione meteo per ASUSTOR NAS - Visualizza condizioni meteo e previsioni"
       }
     ],
-    "icon": "icon.png"
+    "icon": "icon.png",
+    "icon-enable": "icon-enable.png",
+    "icon-disable": "icon-disable.png"
   },
   "prerequisites": {
     "port": 8000,

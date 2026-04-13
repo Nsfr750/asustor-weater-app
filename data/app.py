@@ -15,10 +15,15 @@ Licensed under GPLv3
 import os
 import requests
 from datetime import datetime, date
-from flask import Flask, render_template, jsonify, request
+from flask import Flask, render_template, jsonify, request, session
 from database import db
+from lang.language_manager import get_language_manager, get_weather_description, translate
 
 app = Flask(__name__)
+app.secret_key = os.environ.get('SECRET_KEY', 'weather-app-secret-key')
+
+# Initialize language manager
+lang_manager = get_language_manager('it')
 
 # Open-Meteo API - free, no API key required
 DEFAULT_CITY = "Rome"
@@ -134,39 +139,23 @@ def get_weather_icon_url(weather_code, is_day=1):
     return f"https://bmcdn.nl/assets/weather-icons/v3.0/fill/svg/{icon_name}.svg"
 
 
-def get_weather_description(weather_code):
-    """Get weather description in Italian based on WMO weather code."""
-    descriptions = {
-        0: "Cielo sereno",
-        1: "Prevalentemente sereno",
-        2: "Parzialmente nuvoloso",
-        3: "Coperto",
-        45: "Nebbia",
-        48: "Nebbia con brina",
-        51: "Pioviggine leggera",
-        53: "Pioviggine moderata",
-        55: "Pioviggine intensa",
-        56: "Pioviggine gelata leggera",
-        57: "Pioviggine gelata intensa",
-        61: "Pioggia leggera",
-        63: "Pioggia moderata",
-        65: "Pioggia intensa",
-        66: "Pioggia gelata leggera",
-        67: "Pioggia gelata intensa",
-        71: "Neve leggera",
-        73: "Neve moderata",
-        75: "Neve intensa",
-        77: "Grani di neve",
-        80: "Rovesci leggeri",
-        81: "Rovesci moderati",
-        82: "Rovesci violenti",
-        85: "Nevicate leggere",
-        86: "Nevicate intense",
-        95: "Temporale",
-        96: "Temporale con grandine",
-        99: "Temporale con forte grandine"
-    }
-    return descriptions.get(weather_code, "Condizioni sconosciute")
+def get_current_language():
+    """Get current language from session or default."""
+    return session.get('language', 'it')
+
+
+def set_current_language(lang):
+    """Set current language in session."""
+    if lang in ['it', 'en']:
+        session['language'] = lang
+        lang_manager.set_language(lang)
+        return True
+    return False
+
+
+def get_localized_description(weather_code):
+    """Get weather description in current language based on WMO weather code."""
+    return get_weather_description(weather_code, get_current_language())
 
 
 @app.route("/")
@@ -282,7 +271,44 @@ def api_config():
     """Get default configuration."""
     return jsonify({
         "default_city": DEFAULT_CITY,
-        "default_country": DEFAULT_COUNTRY
+        "default_country": DEFAULT_COUNTRY,
+        "current_language": get_current_language(),
+        "supported_languages": lang_manager.get_supported_languages()
+    })
+
+
+@app.route("/api/language", methods=['GET', 'POST'])
+def api_language():
+    """Get or set current language."""
+    if request.method == 'POST':
+        data = request.get_json()
+        lang = data.get('language', 'it')
+        if set_current_language(lang):
+            return jsonify({
+                "success": True,
+                "language": lang,
+                "message": translate('language_set', lang)
+            })
+        return jsonify({
+            "success": False,
+            "error": "Invalid language"
+        }), 400
+    
+    # GET request
+    return jsonify({
+        "language": get_current_language(),
+        "supported": lang_manager.get_supported_languages()
+    })
+
+
+@app.route("/api/translations")
+def api_translations():
+    """Get all translations for current or specified language."""
+    lang = request.args.get('lang', get_current_language())
+    translations = lang_manager.get_all_translations(lang)
+    return jsonify({
+        "language": lang,
+        "translations": translations
     })
 
 

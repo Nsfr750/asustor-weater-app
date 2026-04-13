@@ -12,6 +12,8 @@ Licenza: GPLv3
 - **Statistiche storiche** con grafici interattivi (temperatura, umidità, pressione, vento)
 - **Database SQLite** per archiviazione dati giornalieri e orari
 - **Pagina dedicata** (`/stats`) con andamenti e riepiloghi
+- **Supporto multilingua IT/EN** con selettore lingua nel menu
+- **Sistema di internazionalizzazione** (i18n) completo
 - Interfaccia web moderna e responsive
 - Supporto per città in tutto il mondo
 - **Nessuna API key richiesta** - Gratuita e open source
@@ -60,6 +62,16 @@ Licenza: GPLv3
 
 ## ⚙️ Configurazione
 
+### Cambio Lingua
+
+L'app supporta Italiano 🇮🇹 e English 🇬🇧:
+
+1. Usa il selettore lingua nel menu di navigazione
+2. La lingua scelta viene salvata automaticamente
+3. Tutte le stringhe dell'interfaccia si aggiornano in tempo reale
+
+### Prima Configurazione
+
 L'app non richiede configurazione. Al primo avvio:
 
 1. Inserisci il nome della città desiderata
@@ -90,6 +102,8 @@ asustor-weather-app/
 │   ├── config.json       # Configurazione pacchetto ASUSTOR
 │   ├── apkg-version      # Versione dell'app
 │   ├── icon.png          # Icona app
+│   ├── icon-enable.png   # Icona attiva (ADM desktop)
+│   ├── icon-disable.png  # Icona disattiva (ADM desktop)
 │   ├── install.sh        # Script installazione
 │   ├── uninstall.sh      # Script disinstallazione
 │   ├── start.sh          # Script avvio
@@ -99,6 +113,10 @@ asustor-weather-app/
 ├── data/                 # File applicazione
 │   ├── app.py            # Backend Flask con Open-Meteo API e database
 │   ├── database.py       # Modulo SQLite per dati storici
+│   ├── lang/             # Sistema internazionalizzazione
+│   │   ├── __init__.py
+│   │   ├── translations.py    # Dizionari IT/EN
+│   │   └── language_manager.py # Gestione lingua backend
 │   ├── requirements.txt  # Dipendenze Python
 │   ├── version.py        # Versione dell'app
 │   ├── templates/
@@ -106,8 +124,9 @@ asustor-weather-app/
 │   │   └── stats.html    # Pagina statistiche con grafici
 │   ├── static/
 │   │   ├── style.css     # Stili CSS
-│   │   ├── app.js        # Script frontend principale
-│   │   └── stats.js      # Script grafici Chart.js
+│   │   ├── app.js       # Script frontend principale
+│   │   ├── stats.js     # Script grafici Chart.js
+│   │   └── i18n.js      # Gestione lingua frontend
 │   ├── README.md         # Documentazione
 │   ├── CHANGELOG.md      # Storico versioni
 │   └── LICENSE           # Licenza GPLv3
@@ -199,9 +218,14 @@ Il file `.apk` generato contiene:
 
 - **Statistiche storiche** con grafici interattivi (Chart.js)
 - **Database SQLite** per archiviazione dati meteo
+- **Supporto multilingua IT/EN** con selettore lingua
+- **Sistema di internazionalizzazione** completo (i18n)
 - Pagina dedicata `/stats` con andamenti e riepiloghi
 - Archiviazione automatica dati ad ogni ricerca
 - Compatibilità ADM estesa alla 2.0+
+- Struttura APK: CONTROL/ e data/ (formato ASUSTOR standard)
+- Icone enable/disable per visualizzazione desktop ADM
+- Avvio automatico app dopo installazione
 
 ### v1.0.0 (2026-04-10)
 

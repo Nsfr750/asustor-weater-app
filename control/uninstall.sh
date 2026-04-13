@@ -19,6 +19,10 @@ if [ -f "${PID_FILE}" ]; then
     rm -f "${PID_FILE}"
 fi
 
+# Remove ADM desktop symlinks
+rm -f "/usr/share/appcentral/weather-app-enable.png" 2>/dev/null || true
+rm -f "/usr/share/appcentral/weather-app-disable.png" 2>/dev/null || true
+
 echo "Uninstallation completed!"
 
 exit 0

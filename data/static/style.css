@@ -316,12 +316,18 @@ header h1 {
 /* Navigation menu */
 .nav-menu {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
+    align-items: center;
     gap: 20px;
     margin-bottom: 20px;
-    padding: 10px;
+    padding: 10px 20px;
     background: rgba(255,255,255,0.1);
     border-radius: 10px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 10px;
 }
 
 .nav-link {
@@ -339,6 +345,33 @@ header h1 {
 
 .nav-link.active {
     background: rgba(255,255,255,0.3);
+}
+
+/* Language selector */
+.language-selector {
+    display: flex;
+    align-items: center;
+}
+
+.language-selector select {
+    padding: 8px 12px;
+    border: 2px solid rgba(255,255,255,0.3);
+    border-radius: 8px;
+    background: rgba(255,255,255,0.2);
+    color: white;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.language-selector select:hover {
+    background: rgba(255,255,255,0.3);
+    border-color: rgba(255,255,255,0.5);
+}
+
+.language-selector select option {
+    background: #1e3c72;
+    color: white;
 }
 
 /* Statistics page */
@@ -516,6 +549,21 @@ footer p {
     .nav-menu {
         flex-direction: column;
         gap: 10px;
+        padding: 10px;
+    }
+    
+    .nav-links {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .language-selector {
+        width: 100%;
+    }
+    
+    .language-selector select {
+        width: 100%;
+        text-align: center;
     }
     
     #daysSelect {
