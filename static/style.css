@@ -313,6 +313,142 @@ header h1 {
     display: none !important;
 }
 
+/* Navigation menu */
+.nav-menu {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 20px;
+    padding: 10px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 10px;
+}
+
+.nav-link {
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    transition: background 0.3s;
+    font-weight: 500;
+}
+
+.nav-link:hover {
+    background: rgba(255,255,255,0.2);
+}
+
+.nav-link.active {
+    background: rgba(255,255,255,0.3);
+}
+
+/* Statistics page */
+.stats-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.summary-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 15px;
+}
+
+.summary-card {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: transform 0.2s;
+}
+
+.summary-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.summary-card h3 {
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.summary-card .value {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #1e3c72;
+    line-height: 1;
+}
+
+.summary-card .unit {
+    font-size: 0.85rem;
+    color: #888;
+    margin-top: 5px;
+}
+
+.charts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 20px;
+}
+
+.chart-container {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.chart-container h2 {
+    color: #1e3c72;
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.chart-container.full-width {
+    grid-column: 1 / -1;
+}
+
+.no-data {
+    background: white;
+    padding: 40px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.no-data p {
+    color: #666;
+    font-size: 1.1rem;
+    margin: 10px 0;
+}
+
+.no-data p:first-child {
+    color: #888;
+    font-size: 1.3rem;
+    font-weight: 500;
+}
+
+/* Select dropdown */
+#daysSelect {
+    padding: 12px 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 1rem;
+    background: white;
+    cursor: pointer;
+    transition: border-color 0.3s;
+}
+
+#daysSelect:focus {
+    outline: none;
+    border-color: #2a5298;
+}
+
 footer {
     text-align: center;
     color: rgba(255,255,255,0.8);
@@ -359,5 +495,30 @@ footer p {
     
     .forecast-container {
         grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    }
+    
+    .charts-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .chart-container {
+        padding: 15px;
+    }
+    
+    .summary-cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .summary-card .value {
+        font-size: 1.8rem;
+    }
+    
+    .nav-menu {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    #daysSelect {
+        width: 100%;
     }
 }

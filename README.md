@@ -9,6 +9,9 @@ Licenza: GPLv3
 
 - Visualizzazione condizioni meteo attuali
 - Previsioni meteo a 5 giorni con min/max temperature
+- **Statistiche storiche** con grafici interattivi (temperatura, umidità, pressione, vento)
+- **Database SQLite** per archiviazione dati giornalieri e orari
+- **Pagina dedicata** (`/stats`) con andamenti e riepiloghi
 - Interfaccia web moderna e responsive
 - Supporto per città in tutto il mondo
 - **Nessuna API key richiesta** - Gratuita e open source
@@ -63,11 +66,28 @@ L'app non richiede configurazione. Al primo avvio:
 2. Clicca su "Cerca"
 3. La città viene salvata automaticamente per i prossimi accessi
 
-## 📁 Struttura del Progetto
+## � Statistiche e Grafici
+
+L'app include una pagina dedicata alle statistiche storiche:
+
+- **Accesso**: Clicca su "📊 Statistiche" nel menu di navigazione o vai a `http://tuo-nas-ip:8000/stats`
+- **Dati archiviati**: Ogni ricerca meteo salva automaticamente i dati in database SQLite
+- **Periodi disponibili**: 7, 30, 90 giorni o 1 anno
+- **Grafici disponibili**:
+  - Andamento temperature (max, media, min)
+  - Umidità media
+  - Pressione atmosferica
+  - Velocità del vento
+  - Andamento orario ultime 24 ore
+
+**Nota**: I dati si accumulano automaticamente ad ogni ricerca. Più spesso cerchi il meteo, più dati avrai nei grafici!
+
+## � Struttura del Progetto
 
 ```text
 asustor-weather-app/
-├── app.py                 # Backend Flask con Open-Meteo API
+├── app.py                 # Backend Flask con Open-Meteo API e database
+├── database.py           # Modulo SQLite per dati storici
 ├── apkg.xml              # Configurazione ASUSTOR App Central
 ├── requirements.txt      # Dipendenze Python
 ├── version.py            # Versione dell'app
@@ -77,10 +97,13 @@ asustor-weather-app/
 ├── stop.sh               # Script stop
 ├── build_apk.sh          # Script build pacchetto APK
 ├── templates/
-│   └── index.html        # Interfaccia web
+│   ├── index.html        # Interfaccia principale meteo
+│   └── stats.html        # Pagina statistiche con grafici
 ├── static/
 │   ├── style.css         # Stili CSS
-│   └── app.js            # Script frontend
+│   ├── app.js            # Script frontend principale
+│   └── stats.js          # Script grafici Chart.js
+├── weather_data.db       # Database SQLite (creato automaticamente)
 ├── README.md             # Documentazione
 ├── CHANGELOG.md          # Storico versioni
 └── LICENSE               # Licenza GPLv3
@@ -129,10 +152,11 @@ Per creare il file `.apk` installabile su ASUSTOR NAS:
 
 ## �🔧 Requisiti
 
-- ASUSTOR NAS con ADM 4.0+
+- ASUSTOR NAS con ADM 2.0+
 - Python 3.8+
 - Porta 8000 disponibile
 - Connessione Internet (per dati meteo)
+- 50MB spazio libero (per database storico)
 
 ## 🐛 Risoluzione Problemi
 
@@ -150,7 +174,15 @@ Per creare il file `.apk` installabile su ASUSTOR NAS:
 
 ## 📝 Changelog
 
-### v1.0.0
+### v1.1.0 (2026-04-13)
+
+- **Statistiche storiche** con grafici interattivi (Chart.js)
+- **Database SQLite** per archiviazione dati meteo
+- Pagina dedicata `/stats` con andamenti e riepiloghi
+- Archiviazione automatica dati ad ogni ricerca
+- Compatibilità ADM estesa alla 2.0+
+
+### v1.0.0 (2026-04-10)
 
 - Rilascio iniziale
 - Supporto meteo attuale e previsioni

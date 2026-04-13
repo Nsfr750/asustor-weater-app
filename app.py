@@ -9,8 +9,9 @@ Licensed under GPLv3
 
 import os
 import requests
-from datetime import datetime
+from datetime import datetime, date
 from flask import Flask, render_template, jsonify, request
+from database import db
 
 app = Flask(__name__)
 
@@ -205,6 +206,18 @@ def api_weather():
         "timestamp": datetime.now().strftime("%d/%m/%Y %H:%M")
     }
     
+    # Save hourly snapshot to database
+    hourly_data = {
+        "city": coords["name"],
+        "timestamp": datetime.now(),
+        "temperature": current.get("temperature_2m"),
+        "humidity": current.get("relative_humidity_2m"),
+        "pressure": current.get("pressure_msl"),
+        "wind_speed": current.get("wind_speed_10m"),
+        "weather_code": weather_code
+    }
+    db.save_hourly_weather(hourly_data)
+    
     return jsonify(weather_info)
 
 
@@ -266,6 +279,61 @@ def api_config():
         "default_city": DEFAULT_CITY,
         "default_country": DEFAULT_COUNTRY
     })
+
+
+@app.route("/api/stats/daily")
+def api_daily_stats():
+    """API endpoint for daily statistics."""
+    city = request.args.get("city", DEFAULT_CITY)
+    days = request.args.get("days", 30, type=int)
+    
+    stats = db.get_daily_stats(city, days)
+    return jsonify({
+        "city": city,
+        "days": days,
+        "data": stats
+    })
+
+
+@app.route("/api/stats/hourly")
+def api_hourly_stats():
+    """API endpoint for hourly statistics."""
+    city = request.args.get("city", DEFAULT_CITY)
+    hours = request.args.get("hours", 24, type=int)
+    
+    stats = db.get_hourly_stats(city, hours)
+    return jsonify({
+        "city": city,
+        "hours": hours,
+        "data": stats
+    })
+
+
+@app.route("/api/stats/summary")
+def api_stats_summary():
+    """API endpoint for temperature summary statistics."""
+    city = request.args.get("city", DEFAULT_CITY)
+    days = request.args.get("days", 30, type=int)
+    
+    summary = db.get_temperature_stats(city, days)
+    return jsonify({
+        "city": city,
+        "days": days,
+        "summary": summary
+    })
+
+
+@app.route("/api/stats/cities")
+def api_cities():
+    """API endpoint for list of cities with data."""
+    cities = db.get_cities_with_data()
+    return jsonify({"cities": cities})
+
+
+@app.route("/stats")
+def stats_page():
+    """Statistics page route."""
+    return render_template("stats.html")
 
 
 if __name__ == "__main__":
