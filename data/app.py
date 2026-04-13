@@ -3,6 +3,11 @@ Weather App for ASUSTOR NAS Lockerstor 6604T
 A Flask-based web application for displaying weather conditions.
 Powered by Open-Meteo API (free, no API key required)
 
+Project Structure:
+- CONTROL/: ASUSTOR control files (scripts, config.json, icon.png)
+- data/: Application files (this file, templates/, static/, database.py)
+- After APK install on NAS: /usr/local/AppCentral/weather-app/
+
 © Copyright 2024-2026 Nsfr750 - All rights reserved.
 Licensed under GPLv3
 """

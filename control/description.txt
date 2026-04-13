@@ -1,1 +1,3 @@
-Weather App APK.
+Weather application for ASUSTOR NAS - Display weather conditions and forecasts
+
+http://nas-ip:8000/

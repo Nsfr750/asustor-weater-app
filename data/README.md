@@ -82,44 +82,46 @@ L'app include una pagina dedicata alle statistiche storiche:
 
 **Nota**: I dati si accumulano automaticamente ad ogni ricerca. Più spesso cerchi il meteo, più dati avrai nei grafici!
 
-## � Struttura del Progetto
+## 📁 Struttura del Progetto
 
 ```text
 asustor-weather-app/
-├── app.py                 # Backend Flask con Open-Meteo API e database
-├── database.py           # Modulo SQLite per dati storici
-├── apkg.xml              # Configurazione ASUSTOR App Central
-├── requirements.txt      # Dipendenze Python
-├── version.py            # Versione dell'app
-├── install.sh            # Script installazione
-├── uninstall.sh          # Script disinstallazione
-├── start.sh              # Script avvio
-├── stop.sh               # Script stop
-├── build_apk.sh          # Script build pacchetto APK
-├── templates/
-│   ├── index.html        # Interfaccia principale meteo
-│   └── stats.html        # Pagina statistiche con grafici
-├── static/
-│   ├── style.css         # Stili CSS
-│   ├── app.js            # Script frontend principale
-│   └── stats.js          # Script grafici Chart.js
-├── weather_data.db       # Database SQLite (creato automaticamente)
-├── README.md             # Documentazione
-├── CHANGELOG.md          # Storico versioni
-└── LICENSE               # Licenza GPLv3
+├── CONTROL/              # File di controllo ASUSTOR (apkg-tools)
+│   ├── config.json       # Configurazione pacchetto ASUSTOR
+│   ├── apkg-version      # Versione dell'app
+│   ├── icon.png          # Icona app
+│   ├── install.sh        # Script installazione
+│   ├── uninstall.sh      # Script disinstallazione
+│   ├── start.sh          # Script avvio
+│   ├── stop.sh           # Script stop
+│   ├── changelog.txt     # Changelog per ASUSTOR
+│   └── description.txt   # Descrizione breve
+├── data/                 # File applicazione
+│   ├── app.py            # Backend Flask con Open-Meteo API e database
+│   ├── database.py       # Modulo SQLite per dati storici
+│   ├── requirements.txt  # Dipendenze Python
+│   ├── version.py        # Versione dell'app
+│   ├── templates/
+│   │   ├── index.html    # Interfaccia principale meteo
+│   │   └── stats.html    # Pagina statistiche con grafici
+│   ├── static/
+│   │   ├── style.css     # Stili CSS
+│   │   ├── app.js        # Script frontend principale
+│   │   └── stats.js      # Script grafici Chart.js
+│   ├── README.md         # Documentazione
+│   ├── CHANGELOG.md      # Storico versioni
+│   └── LICENSE           # Licenza GPLv3
+├── apkg-tools_py3.py     # Tool ASUSTOR per creazione APK (opzionale)
+└── weather_data.db       # Database SQLite (creato automaticamente)
 ```
 
-## � Creazione del pacchetto APK
+## 📦 Creazione del pacchetto APK
 
 Per creare il file `.apk` installabile su ASUSTOR NAS:
 
-### Prerequisiti
+### Metodo 1: apkg-tools_py3.py (Consigliato)
 
-- Linux/macOS/WSL con Bash
-- Python 3.8+
-- tar (installato di default sulla maggior parte dei sistemi)
-
-### Procedura
+Usa il tool ufficiale ASUSTOR per creare il pacchetto:
 
 1. Clona il repository:
 
@@ -128,20 +130,39 @@ Per creare il file `.apk` installabile su ASUSTOR NAS:
    cd asustor-weather-app
    ```
 
-2. Esegui lo script di build:
+2. Aggiorna la versione in `CONTROL/apkg-version` e `data/version.py`
+
+3. Esegui il tool ASUSTOR:
 
    ```bash
-   bash build_apk.sh
+   python apkg-tools_py3.py create . --destination .
    ```
 
-3. Lo script eseguirà automaticamente:
-   - Lettura della versione da `version.py`
-   - Creazione della directory di build
-   - Copia di tutti i file necessari
-   - Impostazione dei permessi di esecuzione
-   - Creazione dell'archivio `.apk` (formato tar.gz)
+4. Al termine troverai il file `weather-app_{versione}_any.apk` nella directory principale.
 
-4. Al termine troverai il file `weather-app-{versione}.apk` nella directory principale.
+### Metodo 2: Script Bash (Alternativo)
+
+Su Linux/macOS/WSL puoi usare lo script shell:
+
+```bash
+bash -c '
+VERSION=$(python3 -c "from data.version import __version__; print(__version__)")
+echo "Building weather-app-${VERSION}.apk..."
+echo "${VERSION}" > CONTROL/apkg-version
+cd CONTROL && tar -czf ../control.tar.gz . && cd ..
+cd data && tar -czf ../data.tar.gz . && cd ..
+tar -czf "weather-app-${VERSION}.apk" control.tar.gz data.tar.gz
+rm control.tar.gz data.tar.gz
+echo "Build completed: weather-app-${VERSION}.apk"
+'
+```
+
+### Struttura APK
+
+Il file `.apk` generato contiene:
+- `control.tar.gz`: file di controllo ASUSTOR (config.json, scripts, icona)
+- `data.tar.gz`: applicazione completa (Python, templates, static)
+- `apkg-version`: file con la versione del pacchetto
 
 ### Installazione del pacchetto
 
