@@ -1,0 +1,38 @@
+{
+  "general": {
+    "package": "weather-app",
+    "name": "WeatherApp",
+    "version": "1.1.0",
+    "depends": "",
+    "conflicts": "",
+    "developer": "Nsfr750 - Tuxxle",
+    "maintainer": "Nsfr750",
+    "email": "nsfr750@yandex.com",
+    "website": "https://www.tuxxle.org",
+    "architecture": "any",
+    "firmware": "2.0.0"
+  },
+  "desktop": {
+    "description": "Weather application for ASUSTOR NAS - Display weather conditions and forecasts",
+    "descriptionLang": [
+      {
+        "lang": "en",
+        "description": "Weather application for ASUSTOR NAS - Display weather conditions and forecasts"
+      },
+      {
+        "lang": "it",
+        "description": "Applicazione meteo per ASUSTOR NAS - Visualizza condizioni meteo e previsioni"
+      }
+    ],
+    "icon": "icon.png"
+  },
+  "prerequisites": {
+    "port": 8000,
+    "webui": {
+      "protocol": "http",
+      "port": 8000,
+      "url": "/"
+    },
+    "python3": "3.8"
+  }
+}

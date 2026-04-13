@@ -8,7 +8,7 @@
 <package>
     <name>WeatherApp</name>
     <internalName>weather-app</internalName>
-    <version>1.0.0</version>
+    <version>1.1.0</version>
     <description>Applicazione meteo per ASUSTOR NAS - Visualizza condizioni meteo e previsioni</description>
     <descriptionLang>
         <lang>en</lang>

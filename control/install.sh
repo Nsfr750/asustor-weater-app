@@ -16,6 +16,7 @@ mkdir -p "${LOG_DIR}"
 chmod -R 755 "${APP_DIR}"
 touch "${LOG_DIR}/app.log"
 chmod 666 "${LOG_DIR}/app.log"
+chmod +x /usr/local/AppCentral/weather-app/control/*.sh
 
 # Install Python dependencies
 echo "Installing Python dependencies..."
