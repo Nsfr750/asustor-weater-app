@@ -1,44 +1,44 @@
-# Meteo ASUSTOR - Weather App for ASUSTOR NAS
+# Weather App for ASUSTOR NAS
 
-Applicazione meteo per ASUSTOR NAS Lockerstor 6604T (e altri modelli compatibili). Visualizza condizioni meteo attuali e previsioni a 5 giorni.
+Weather application for ASUSTOR NAS Lockerstor 6604T (and other compatible models). Displays current weather conditions and 5-day forecasts.
 
-© Copyright 2024-2026 Nsfr750 - All rights reserved.  
-Licenza: GPLv3
+© Copyright 2024-2026 Nsfr750 - All rights reserved.
+License: GPLv3
 
-## 📋 Caratteristiche
+## 📋 Features
 
-- Visualizzazione condizioni meteo attuali
-- Previsioni meteo a 5 giorni con min/max temperature
-- **Statistiche storiche** con grafici interattivi (temperatura, umidità, pressione, vento)
-- **Database SQLite** per archiviazione dati giornalieri e orari
-- **Pagina dedicata** (`/stats`) con andamenti e riepiloghi
-- **Supporto multilingua IT/EN** con selettore lingua nel menu
-- **Sistema di internazionalizzazione** (i18n) completo
-- Interfaccia web moderna e responsive
-- Supporto per città in tutto il mondo
-- **Nessuna API key richiesta** - Gratuita e open source
-- Salvataggio preferenze città (localStorage)
-- Dati forniti da [Open-Meteo](https://open-meteo.com)
+- Current weather conditions display
+- 5-day weather forecasts with min/max temperatures
+- **Historical statistics** with interactive charts (temperature, humidity, pressure, wind)
+- **SQLite Database** for daily and hourly data storage
+- **Dedicated page** (`/stats`) with trends and summaries
+- **Multi-language support IT/EN** with language selector in menu
+- **Complete internationalization system** (i18n)
+- Modern and responsive web interface
+- Support for cities worldwide
+- **No API key required** - Free and open source
+- City preferences saving (localStorage)
+- Data provided by [Open-Meteo](https://open-meteo.com)
 
-## 🚀 Installazione
+## 🚀 Installation
 
-### Metodo 1: App Central (Consigliato)
+### Method 1: App Central (Recommended)
 
-1. Scarica il file `.apk` dalla sezione [Releases](https://github.com/Nsfr750/asustor-weather-app/releases)
-2. Apri App Central sul tuo ASUSTOR NAS
-3. Clicca su "Installazione manuale"
-4. Seleziona il file `.apk` scaricato
-5. Segui la procedura guidata
+1. Download the `.apk` file from the [Releases](https://github.com/Nsfr750/asustor-weather-app/releases) section
+2. Open App Central on your ASUSTOR NAS
+3. Click on "Manual Installation"
+4. Select the downloaded `.apk` file
+5. Follow the guided procedure
 
-### Metodo 2: Manuale via SSH
+### Method 2: Manual via SSH
 
-1. Connettiti al NAS via SSH:
+1. Connect to NAS via SSH:
 
    ```bash
-   ssh admin@tuo-nas-ip
+   ssh admin@your-nas-ip
    ```
 
-2. Scarica l'applicazione:
+2. Download the application:
 
    ```bash
    cd /usr/local/AppCentral
@@ -46,122 +46,124 @@ Licenza: GPLv3
    cd weather-app
    ```
 
-3. Installa le dipendenze:
+3. Install dependencies:
 
    ```bash
    python3 -m pip install -r requirements.txt --user
    ```
 
-4. Avvia l'applicazione:
+4. Start the application:
 
    ```bash
    ./start.sh
    ```
 
-5. Accedi all'app: `http://tuo-nas-ip:8000`
+5. Access the app: `http://your-nas-ip:8000`
 
-## ⚙️ Configurazione
+## Configuration
 
-### Cambio Lingua
+### Language Change
 
-L'app supporta Italiano 🇮🇹 e English 🇬🇧:
+The app supports Italian  and English :
 
-1. Usa il selettore lingua nel menu di navigazione
-2. La lingua scelta viene salvata automaticamente
-3. Tutte le stringhe dell'interfaccia si aggiornano in tempo reale
+1. Use the language selector in the navigation menu
+2. The chosen language is saved automatically
+3. All interface strings update in real time
 
-### Prima Configurazione
+### First Configuration
 
-L'app non richiede configurazione. Al primo avvio:
+The app requires no configuration. On first launch:
 
-1. Inserisci il nome della città desiderata
-2. Clicca su "Cerca"
-3. La città viene salvata automaticamente per i prossimi accessi
+1. Enter the desired city name
+2. Click on "Search"
+3. The city is saved automatically for future access
 
-## � Statistiche e Grafici
+## Statistics and Charts
 
-L'app include una pagina dedicata alle statistiche storiche:
+The app includes a dedicated page for historical statistics:
 
-- **Accesso**: Clicca su "📊 Statistiche" nel menu di navigazione o vai a `http://tuo-nas-ip:8000/stats`
-- **Dati archiviati**: Ogni ricerca meteo salva automaticamente i dati in database SQLite
-- **Periodi disponibili**: 7, 30, 90 giorni o 1 anno
-- **Grafici disponibili**:
-  - Andamento temperature (max, media, min)
-  - Umidità media
-  - Pressione atmosferica
-  - Velocità del vento
-  - Andamento orario ultime 24 ore
+- **Access**: Click on " Statistics" in the navigation menu or go to `http://your-nas-ip:8000/stats`
+- **Stored data**: Every weather search automatically saves data to SQLite database
+- **Available periods**: 7, 30, 90 days or 1 year
+- **Available charts**:
+  - Temperature trend (max, avg, min)
+  - Average humidity
+  - Atmospheric pressure
+  - Wind speed
+  - Hourly trend of last 24 hours
 
-**Nota**: I dati si accumulano automaticamente ad ogni ricerca. Più spesso cerchi il meteo, più dati avrai nei grafici!
+**Note**: Data accumulates automatically with every search. The more often you search for weather, the more data you'll have in the charts!
 
-## 📁 Struttura del Progetto
+## 📁 Project Structure
 
 ```text
 asustor-weather-app/
-├── CONTROL/              # File di controllo ASUSTOR (apkg-tools)
-│   ├── config.json       # Configurazione pacchetto ASUSTOR
-│   ├── apkg-version      # Versione dell'app
-│   ├── icon.png          # Icona app
-│   ├── icon-enable.png   # Icona attiva (ADM desktop)
-│   ├── icon-disable.png  # Icona disattiva (ADM desktop)
-│   ├── install.sh        # Script installazione
-│   ├── uninstall.sh      # Script disinstallazione
-│   ├── start.sh          # Script avvio
-│   ├── stop.sh           # Script stop
-│   ├── changelog.txt     # Changelog per ASUSTOR
-│   └── description.txt   # Descrizione breve
-├── data/                 # File applicazione
-│   ├── app.py            # Backend Flask con Open-Meteo API e database
-│   ├── database.py       # Modulo SQLite per dati storici
-│   ├── lang/             # Sistema internazionalizzazione
+├── CONTROL/                    # ASUSTOR control files (apkg-tools)
+│   ├── config.json             # ASUSTOR package configuration
+│   ├── apkg-version            # App version
+│   ├── icon.png                # App icon
+│   ├── icon-enable.png         # Active icon (ADM desktop)
+│   ├── icon-disable.png        # Disabled icon (ADM desktop)
+│   ├── install.sh              # Installation script
+│   ├── uninstall.sh            # Uninstallation script
+│   ├── start.sh                # Start script
+│   ├── stop.sh                 # Stop script
+│   ├── changelog.txt           # Changelog for ASUSTOR
+│   └── description.txt         # Short description
+├── data/                       # Application files
+│   ├── app.py                  # Flask backend with Open-Meteo API and database
+│   ├── database.py             # SQLite module for historical data
+│   ├── lang/                   # Internationalization system
 │   │   ├── __init__.py
-│   │   ├── translations.py    # Dizionari IT/EN
-│   │   └── language_manager.py # Gestione lingua backend
-│   ├── requirements.txt  # Dipendenze Python
-│   ├── version.py        # Versione dell'app
+│   │   ├── translations.py     # IT/EN dictionaries
+│   │   └── language_manager.py # Backend language management
+│   ├── requirements.txt        # Python dependencies
+│   ├── version.py              # App version
 │   ├── templates/
-│   │   ├── index.html    # Interfaccia principale meteo
-│   │   └── stats.html    # Pagina statistiche con grafici
+│   │   ├── index.html          # Main weather interface
+│   │   └── stats.html          # Statistics page with charts
 │   ├── static/
-│   │   ├── style.css     # Stili CSS
-│   │   ├── app.js       # Script frontend principale
-│   │   ├── stats.js     # Script grafici Chart.js
-│   │   └── i18n.js      # Gestione lingua frontend
-│   ├── README.md         # Documentazione
-│   ├── CHANGELOG.md      # Storico versioni
-│   └── LICENSE           # Licenza GPLv3
-├── apkg-tools_py3.py     # Tool ASUSTOR per creazione APK (opzionale)
-└── weather_data.db       # Database SQLite (creato automaticamente)
+│   │   ├── style.css           # CSS styles
+│   │   ├── app.js              # Main frontend script
+│   │   ├── stats.js            # Chart.js charts script
+│   │   └── i18n.js             # Frontend language management
+│   ├── README.md               # Documentation
+│   ├── CHANGELOG.md            # Version history
+│   └── LICENSE                 # GPLv3 license
+├── apkg-tools.py               # ASUSTOR tool for APK creation (optional)
+├── apkg-developer-guide.md     # ASUSTOR developer guide
+├── apkg-version                # ASUSTOR package version
+└── weather_data.db             # SQLite database (created automatically)
 ```
 
-## 📦 Creazione del pacchetto APK
+## 📦 APK Package Creation
 
-Per creare il file `.apk` installabile su ASUSTOR NAS:
+To create the installable `.apk` file for ASUSTOR NAS:
 
-### Metodo 1: apkg-tools_py3.py (Consigliato)
+### Method 1: apkg-tools.py (Recommended)
 
-Usa il tool ufficiale ASUSTOR per creare il pacchetto:
+Use the official ASUSTOR tool to create the package:
 
-1. Clona il repository:
+1. Clone the repository:
 
    ```bash
    git clone https://github.com/Nsfr750/asustor-weather-app.git
    cd asustor-weather-app
    ```
 
-2. Aggiorna la versione in `CONTROL/apkg-version` e `data/version.py`
+2. Update the version in `CONTROL/apkg-version` and `data/version.py`
 
-3. Esegui il tool ASUSTOR:
+3. Run the ASUSTOR tool:
 
    ```bash
    python apkg-tools_py3.py create . --destination .
    ```
 
-4. Al termine troverai il file `weather-app_{versione}_any.apk` nella directory principale.
+4. At the end you will find the file `weather-app_{version}_any.apk` in the main directory.
 
-### Metodo 2: Script Bash (Alternativo)
+### Method 2: Bash Script (Alternative)
 
-Su Linux/macOS/WSL puoi usare lo script shell:
+On Linux/macOS/WSL you can use the shell script:
 
 ```bash
 bash -c '
@@ -176,64 +178,65 @@ echo "Build completed: weather-app-${VERSION}.apk"
 '
 ```
 
-### Struttura APK
+### APK Structure
 
-Il file `.apk` generato contiene:
-- `control.tar.gz`: file di controllo ASUSTOR (config.json, scripts, icona)
-- `data.tar.gz`: applicazione completa (Python, templates, static)
-- `apkg-version`: file con la versione del pacchetto
+The generated `.apk` file contains:
 
-### Installazione del pacchetto
+- `control.tar.gz`: ASUSTOR control files (config.json, scripts, icon)
+- `data.tar.gz`: complete application (Python, templates, static)
+- `apkg-version`: file with package version
 
-1. Apri **App Central** sul tuo ASUSTOR NAS
-2. Clicca su **"Installazione manuale"**
-3. Seleziona il file `.apk` generato
-4. Segui la procedura guidata
+### Package Installation
 
-## �🔧 Requisiti
+1. Open **App Central** on your ASUSTOR NAS
+2. Click on **"Manual Installation"**
+3. Select the generated `.apk` file
+4. Follow the guided procedure
 
-- ASUSTOR NAS con ADM 2.0+
+## Requirements
+
+- ASUSTOR NAS with ADM 2.0+
 - Python 3.8+
-- Porta 8000 disponibile
-- Connessione Internet (per dati meteo)
-- 50MB spazio libero (per database storico)
+- Port 8000 available
+- Internet connection (for weather data)
+- 50MB free space (for historical database)
 
-## 🐛 Risoluzione Problemi
+## Troubleshooting
 
-### L'app non si avvia
+### App doesn't start
 
-- Verifica che Python 3 sia installato: `python3 --version`
-- Controlla i log: `/usr/local/AppCentral/weather-app/logs/app.log`
-- Verifica che la porta 8000 sia libera
+- Verify that Python 3 is installed: `python3 --version`
+- Check logs: `/usr/local/AppCentral/weather-app/logs/app.log`
+- Verify that port 8000 is free
 
-### Dati meteo non caricano
+### Weather data doesn't load
 
-- Verifica la connessione Internet del NAS
-- Verifica che il servizio Open-Meteo sia raggiungibile
-- Prova con un'altra città (alcuni nomi possono avere varianti)
+- Verify NAS internet connection
+- Verify that Open-Meteo service is reachable
+- Try with another city (some names may have variants)
 
-## 📝 Changelog
+## Changelog
 
 ### v1.1.0 (2026-04-13)
 
-- **Statistiche storiche** con grafici interattivi (Chart.js)
-- **Database SQLite** per archiviazione dati meteo
-- **Supporto multilingua IT/EN** con selettore lingua
-- **Sistema di internazionalizzazione** completo (i18n)
-- Pagina dedicata `/stats` con andamenti e riepiloghi
-- Archiviazione automatica dati ad ogni ricerca
-- Compatibilità ADM estesa alla 2.0+
-- Struttura APK: CONTROL/ e data/ (formato ASUSTOR standard)
-- Icone enable/disable per visualizzazione desktop ADM
-- Avvio automatico app dopo installazione
+- **Historical statistics** with interactive charts (Chart.js)
+- **SQLite Database** for weather data storage
+- **Multi-language support IT/EN** with language selector
+- **Complete internationalization system** (i18n)
+- Dedicated page `/stats` with trends and summaries
+- Automatic data storage on every search
+- Extended ADM compatibility to 2.0+
+- APK structure: CONTROL/ and data/ (standard ASUSTOR format)
+- Enable/disable icons for ADM desktop visualization
+- Automatic app start after installation
 
 ### v1.0.0 (2026-04-10)
 
-- Rilascio iniziale
-- Supporto meteo attuale e previsioni
-- Interfaccia in italiano
+- Initial release
+- Current weather and forecast support
+- Italian interface
 
-## 👤 Autore
+## 👤 Author
 
 ## Nsfr750 - Tuxxle
 
@@ -241,14 +244,14 @@ Il file `.apk` generato contiene:
 - Email: [NSFR750](mailto:nsfr750@yandex.com)
 - Website: [https://www.tuxxle.org](https://www.tuxxle.org)
 
-## 💰 Supporta lo sviluppo
+## 💰 Support Development
 
 - **PayPal**: [paypal.me/3dmega](https://paypal.me/3dmega)
 - **Monero**: `47Jc6MC47WJVFhiQFYwHyBNQP5BEsjUPG6tc8R37FwcTY8K5Y3LvFzveSXoGiaDQSxDrnCUBJ5WBj6Fgmsfix8VPD4w3gXF`
 
-## 📜 Licenza
+## 📜 License
 
-Questo progetto è rilasciato sotto licenza **GPLv3**. Vedi file LICENSE per dettagli.
+This project is released under **GPLv3** license. See LICENSE file for details.
 
 ---
 

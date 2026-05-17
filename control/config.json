@@ -2,7 +2,7 @@
   "general": {
     "package": "weather-app",
     "name": "WeatherApp",
-    "version": "1.1.0",
+    "version": "1.2.0",
     "depends": "",
     "conflicts": "",
     "developer": "Nsfr750 - Tuxxle",

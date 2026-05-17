@@ -2,55 +2,55 @@
 
 ## [1.1.0] - 2026-04-13
 
-### Aggiunto - 2026-04-13
+### Added - 2026-04-13
 
-- **Database SQLite** per archiviazione dati storici
-- **Pagina Statistiche** (`/stats`) con grafici interattivi (Chart.js)
-- **Archiviazione automatica** dati meteo ad ogni ricerca
-- **Grafici storici**: temperatura (max/media/min), umidità, pressione, vento
-- **Andamento orario** ultime 24 ore con doppio asse
-- **Card riepilogative** con statistiche di sintesi
-- **Supporto multilingua IT/EN** con selettore lingua nel menu
-- **Sistema di internazionalizzazione** completo (i18n)
-- Selettore periodo: 7, 30, 90 giorni o 1 anno
-- Menu navigazione tra Home e Statistiche
-- API endpoint per dati statistici (`/api/stats/*`)
-- Cleanup automatico dati vecchi (configurabile)
+- **SQLite Database** for historical data storage
+- **Statistics Page** (`/stats`) with interactive charts (Chart.js)
+- **Automatic storage** of weather data on every search
+- **Historical charts**: temperature (max/avg/min), humidity, pressure, wind
+- **Hourly trend** of last 24 hours with dual axis
+- **Summary cards** with synthetic statistics
+- **Multi-language support IT/EN** with language selector in menu
+- **Complete internationalization system** (i18n)
+- Period selector: 7, 30, 90 days or 1 year
+- Navigation menu between Home and Statistics
+- API endpoints for statistical data (`/api/stats/*`)
+- Automatic cleanup of old data (configurable)
 
-### Modificato
+### Changed
 
-- Compatibilità ADM estesa dalla 2.0+ (precedentemente 4.0+)
-- Rimosso requisito screenshot da `apkg.xml` per ADM 2.0
-- Struttura APK: file divisi in CONTROL/ e data/ (formato ASUSTOR standard)
-- Aggiunte icone enable/disable per visualizzazione desktop ADM
-- Installazione automatica con avvio app al termine
-- Script install.sh migliorato per copia file in root app
+- Extended ADM compatibility from 2.0+ (previously 4.0+)
+- Removed screenshot requirement from `apkg.xml` for ADM 2.0
+- APK structure: files split into CONTROL/ and data/ (standard ASUSTOR format)
+- Added enable/disable icons for ADM desktop visualization
+- Automatic installation with app start at completion
+- Improved install.sh script for file copy to app root
 
 ## [1.0.0] - 2026-04-10
 
-### Aggiunto - 2026-04-10
+### Added - 2026-04-10
 
-- Rilascio iniziale dell'applicazione Meteo per ASUSTOR NAS
-- **Migrazione a Open-Meteo API** - Nessuna API key richiesta
-- Supporto meteo attuale con descrizioni in italiano
-- Previsioni 5 giorni con min/max temperature
-- Interfaccia in italiano
-- Icone SVG meteo integrative con design moderno
-- Supporto per qualsiasi città mondiale
-- Salvataggio preferenze utente (città) in localStorage
-- Supporto multilingua (Italiano/Inglese)
-- Pacchetto ASUSTOR APK compatibile con App Central
-- Script di installazione, avvio e stop automatizzati
-- Documentazione completa in italiano
+- Initial release of Weather App for ASUSTOR NAS
+- **Migration to Open-Meteo API** - No API key required
+- Current weather support with Italian descriptions
+- 5-day forecasts with min/max temperatures
+- Italian interface
+- Integrated weather SVG icons with modern design
+- Support for any city worldwide
+- User preferences saving (city) in localStorage
+- Multi-language support (Italian/English)
+- ASUSTOR APK package compatible with App Central
+- Automated installation, start and stop scripts
+- Complete documentation in Italian
 
-### Caratteristiche Tecniche
+### Technical Features
 
-- Backend in Python Flask
-- Frontend HTML5, CSS3, JavaScript vanilla
-- API RESTful per dati meteo
-- Compatibilità con ASUSTOR ADM 2.0+
-- Porta 8000 configurabile
-- Database SQLite integrato
+- Python Flask backend
+- HTML5, CSS3, vanilla JavaScript frontend
+- RESTful API for weather data
+- Compatibility with ASUSTOR ADM 2.0+
+- Configurable port 8000
+- Integrated SQLite database
 
 ---
 

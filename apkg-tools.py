@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Copyright (c) 2021-2023 Asustor Systems, Inc. All Rights Reserved.
+# © Copyright 2024-2026 Nsfr750 - All rights reserved.
 
 # -*- coding: utf-8 -*-
 
@@ -15,9 +15,9 @@ import glob
 import re
 import csv
 
-__author__    = 'Nsfr750'
-__copyright__ = 'Copyright (C) 2024-2026 Nsfr750.  All Rights Reserved.'
-__version__   = '1.1.0'
+__author__    = 'Nsfr750 <nsfr750@yandex.com>'
+__copyright__ = '© Copyright 2024-2026 Nsfr750 - All rights reserved.'
+__version__   = '1.0.0'
 __abs_path__  = os.path.abspath(sys.argv[0])
 __program__   = os.path.basename(__abs_path__)
 
@@ -30,6 +30,10 @@ def find_developer(app):
 				if row[0] == app:
 					developer = row[1]
 					break;
+
+	# Default to Tuxxle for No-IP DDNS Manager
+	if app == 'noip-ddns':
+		developer = 'Tuxxle'
 
 	return developer
 
@@ -75,10 +79,11 @@ class Apkg:
 		'changlog'              : 'changelog.txt',
 		'description'           : 'description.txt',
 		'icon'                  : 'icon.png',
-		'script-install'        : 'install.sh',
-		'script-uninstall'      : 'uninstall.sh',
-		'script-start'          : 'start.sh',
-		'script-stop'           : 'stop.sh',
+		'script-pre-install'    : 'pre-install.sh',
+		'script-pre-uninstall'  : 'pre-uninstall.sh',
+		'script-post-install'   : 'post-install.sh',
+		'script-post-uninstall' : 'post-uninstall.sh',
+		'script-start-stop'     : 'start-stop.sh',
 	}
 
 	apk_web_settings = {
@@ -233,10 +238,13 @@ class Apkg:
 			print ('Invalid App layout: %s' % (app_dir))
 			return -1
 
-		# change file mode and owner (Unix only)
+		# change file mode and owner
 		os.chmod(control_dir, 0o755)
-		if hasattr(os, 'chown'):
+		try:
 			os.chown(control_dir, 0, 0)
+		except AttributeError:
+			# os.chown not available on Windows
+			pass
 
 		all_files = glob.glob(control_dir + '/*')
 		sh_files  = glob.glob(control_dir + '/*.sh')
@@ -244,12 +252,15 @@ class Apkg:
 
 		for one_file in all_files:
 			os.chmod(one_file, 0o644)
-			if hasattr(os, 'chown'):
+			try:
 				os.chown(one_file, 0, 0)
+			except AttributeError:
+				# os.chown not available on Windows
+				pass
 
 		for one_file in sh_files:
 			os.chmod(one_file, 0o755)
-			if hasattr(os, 'system') and os.name != 'nt':
+			if sys.platform != 'win32':
 				os.system('dos2unix %s > /dev/null 2>&1' % (one_file))
 
 		for one_file in py_files:
@@ -530,9 +541,9 @@ class Apkg:
 # main
 if __name__ == "__main__":
 	# create the top-level parser
-	parser = argparse.ArgumentParser(description='asustor package helper.')
+	parser = argparse.ArgumentParser(description='No-IP DDNS Manager package helper.')
 
-	subparsers = parser.add_subparsers(help='arguments')
+	subparsers = parser.add_subparsers(dest='command', help='arguments')
 
 	# create the parser for the "create" commad
 	parser_create = subparsers.add_parser('create', help='<folder> [--destination <folder>] create package')
@@ -545,6 +556,11 @@ if __name__ == "__main__":
 	parser_extract.add_argument('package', help='select a package to extract')
 	parser_extract.add_argument('--destination', help='extract apk to destination folder')
 	parser_extract.set_defaults(command='extract')
+
+	# create the parser for the "build-noip" commad
+	parser_build = subparsers.add_parser('build-noip', help='build No-IP DDNS Manager package')
+	parser_build.add_argument('--destination', help='create apk in destination folder', default='.')
+	parser_build.set_defaults(command='build-noip')
 
 	# create the parser for the "convert" commad
 #	parser_convert = subparsers.add_parser('convert', help='convert package format to 2.0')
@@ -567,6 +583,9 @@ if __name__ == "__main__":
 
 	elif args.command == 'extract':
 		apkg.extract(args.package, args.destination)
+
+	elif args.command == 'build-noip':
+		apkg.create('.', args.destination)
 
 #	elif args.command == 'convert':
 #		apkg.convert(args.package)
