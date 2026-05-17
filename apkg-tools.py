@@ -31,8 +31,8 @@ def find_developer(app):
 					developer = row[1]
 					break;
 
-	# Default to Tuxxle for No-IP DDNS Manager
-	if app == 'noip-ddns':
+	# Default to Tuxxle for Weather App
+	if app == 'weather-app':
 		developer = 'Tuxxle'
 
 	return developer
@@ -541,7 +541,7 @@ class Apkg:
 # main
 if __name__ == "__main__":
 	# create the top-level parser
-	parser = argparse.ArgumentParser(description='No-IP DDNS Manager package helper.')
+	parser = argparse.ArgumentParser(description='Weather App for ASUSTOR NAS.')
 
 	subparsers = parser.add_subparsers(dest='command', help='arguments')
 
@@ -557,10 +557,10 @@ if __name__ == "__main__":
 	parser_extract.add_argument('--destination', help='extract apk to destination folder')
 	parser_extract.set_defaults(command='extract')
 
-	# create the parser for the "build-noip" commad
-	parser_build = subparsers.add_parser('build-noip', help='build No-IP DDNS Manager package')
+	# create the parser for the "build-weather" command
+	parser_build = subparsers.add_parser('build-weather', help='build Weather App package')
 	parser_build.add_argument('--destination', help='create apk in destination folder', default='.')
-	parser_build.set_defaults(command='build-noip')
+	parser_build.set_defaults(command='build-weather')
 
 	# create the parser for the "convert" commad
 #	parser_convert = subparsers.add_parser('convert', help='convert package format to 2.0')
@@ -584,7 +584,7 @@ if __name__ == "__main__":
 	elif args.command == 'extract':
 		apkg.extract(args.package, args.destination)
 
-	elif args.command == 'build-noip':
+	elif args.command == 'build-weather':
 		apkg.create('.', args.destination)
 
 #	elif args.command == 'convert':

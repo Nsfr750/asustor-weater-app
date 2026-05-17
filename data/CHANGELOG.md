@@ -1,13 +1,13 @@
 # Changelog
 
-Tutte le modifiche significative a questo progetto saranno documentate in questo file.
+All significant changes to this project will be documented in this file.
 
-Il formato è basato su [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
-e questo progetto aderisce a [Semantic Versioning](https://semver.org/lang/it/spec/v2.0.0.html).
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/lang/it/spec/v2.0.0.html).
 
 ## [1.1.0] - 2026-04-13
 
-### Aggiunto
+### Added
 
 - **Database SQLite** per archiviazione dati storici
 - **Pagina Statistiche** (`/stats`) con grafici interattivi (Chart.js)
@@ -23,7 +23,7 @@ e questo progetto aderisce a [Semantic Versioning](https://semver.org/lang/it/sp
 - API endpoint per dati statistici (`/api/stats/*`)
 - Cleanup automatico dati vecchi (configurabile)
 
-### Modificato
+### Changed
 
 - Compatibilità ADM estesa dalla 2.0+ (precedentemente 4.0+)
 - Rimosso requisito screenshot da `apkg.xml` per ADM 2.0
@@ -35,7 +35,7 @@ e questo progetto aderisce a [Semantic Versioning](https://semver.org/lang/it/sp
 
 ## [1.0.0] - 2026-04-10
 
-### Aggiunto - 2026-04-10
+### Added - 2026-04-10
 
 - Rilascio iniziale dell'applicazione Meteo per ASUSTOR NAS
 - **Migrazione a Open-Meteo API** - Nessuna API key richiesta
@@ -50,7 +50,7 @@ e questo progetto aderisce a [Semantic Versioning](https://semver.org/lang/it/sp
 - Script di installazione, avvio e stop automatizzati
 - Documentazione completa in italiano
 
-### Caratteristiche Tecniche
+### Technical Features
 
 - Backend in Python Flask
 - Frontend HTML5, CSS3, JavaScript vanilla
