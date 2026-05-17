@@ -1,5 +1,5 @@
 """
-Translations for Weather App
+Translations for Weather App 1.2.0
 Contains all language strings for IT and EN
 
 © Copyright 2024-2026 Nsfr750 - All rights reserved.

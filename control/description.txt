@@ -8,4 +8,4 @@ Features:
 - Multi-language support (IT/EN)
 - Web interface at http://nas-ip:8000/
 
-Version: 1.1.0 | ADM 2.0+
+Version: 1.2.0 | ADM 2.0+

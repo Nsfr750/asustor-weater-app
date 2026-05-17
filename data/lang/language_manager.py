@@ -1,5 +1,5 @@
 """
-Language Manager for Weather App
+Language Manager for Weather App 1.2.0
 Handles language detection, switching, and translations
 
 © Copyright 2024-2026 Nsfr750 - All rights reserved.

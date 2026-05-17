@@ -3,6 +3,7 @@
  * © Copyright 2024-2026 Nsfr750 - All rights reserved.
  * Licensed under GPLv3
  * Powered by Open-Meteo API
+ * Version 1.2.0
  */
 
 document.addEventListener('DOMContentLoaded', function() {
