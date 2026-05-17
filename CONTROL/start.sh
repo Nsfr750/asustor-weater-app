@@ -4,7 +4,6 @@
 # Licensed under GPLv3
 
 APP_DIR="/usr/local/AppCentral/weather-app"
-LOG_FILE="${APP_DIR}/logs/app.log"
 PID_FILE="${APP_DIR}/weather-app.pid"
 
 # Check if already running
