@@ -9,7 +9,7 @@ PYTHON_CMD=/usr/local/bin/python3
 case $1 in
 	start)
 		# start weather service
-		$PYTHON_CMD $APKG_PKG_DIR/data/app.py --daemon > /dev/null 2>&1 &
+		$PYTHON_CMD $APKG_PKG_DIR/data/app.py > /dev/null 2>&1 &
 		echo $! > $PID_FILE_DD
 		;;
 	stop)

@@ -17,8 +17,8 @@ fi
 
 # Start the application
 echo "Starting Weather App..."
-cd "${APP_DIR}"
-nohup python3 app.py >> "${LOG_FILE}" 2>&1 &
+cd "${APP_DIR}/data"
+nohup python3 app.py > /dev/null 2>&1 &
 NEW_PID=$!
 echo ${NEW_PID} > "${PID_FILE}"
 
