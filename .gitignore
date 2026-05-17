@@ -182,3 +182,7 @@ cython_debug/
 
 # APK files
 *.apk
+wheather256.png
+screenshot.png
+apkg-developer-mapping.csv
+apkg-tools.py

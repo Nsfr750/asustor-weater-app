@@ -122,17 +122,17 @@ asustor-weather-app/
 │   ├── templates/
 │   │   ├── index.html          # Main weather interface
 │   │   └── stats.html          # Statistics page with charts
-│   ├── static/
-│   │   ├── style.css           # CSS styles
-│   │   ├── app.js              # Main frontend script
-│   │   ├── stats.js            # Chart.js charts script
-│   │   └── i18n.js             # Frontend language management
-│   ├── README.md               # Documentation
-│   ├── CHANGELOG.md            # Version history
-│   └── LICENSE                 # GPLv3 license
+│   └── static/
+│       ├── style.css           # CSS styles
+│       ├── app.js              # Main frontend script
+│       ├── stats.js            # Chart.js charts script
+│       └── i18n.js             # Frontend lang
 ├── apkg-tools.py               # ASUSTOR tool for APK creation (optional)
 ├── apkg-developer-guide.md     # ASUSTOR developer guide
 ├── apkg-version                # ASUSTOR package version
+├── README.md                   # Documentation
+├── CHANGELOG.md                # Version history
+├── LICENSE                     # GPLv3 license
 └── weather_data.db             # SQLite database (created automatically)
 ```
 
@@ -216,6 +216,14 @@ The generated `.apk` file contains:
 - Try with another city (some names may have variants)
 
 ## Changelog
+
+### v1.2.0 (2026-05-17)
+
+- Updated CONTROL scripts for correct file paths (app.py instead of ddns_updater.py)
+- Updated apkg-tools.py for Weather App (removed No-IP references)
+- Updated all documentation to English language
+- Fixed version consistency across all configuration files
+- Improved package build scripts and installation process
 
 ### v1.1.0 (2026-04-13)
 

@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.2.0] - 2026-05-17
+
+### Added - 2026-05-17
+
+- Updated CONTROL scripts for correct file paths
+- Updated all documentation to English language
+- Fixed version consistency across all configuration files
+- Improved package build scripts and installation process
+
 ## [1.1.0] - 2026-04-13
 
 ### Added - 2026-04-13

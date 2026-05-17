@@ -5,9 +5,18 @@ All significant changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/lang/it/spec/v2.0.0.html).
 
-## [1.1.0] - 2026-04-13
+## [1.2.0] - 2026-05-17
 
 ### Added
+
+- Updated CONTROL scripts for correct file paths
+- Updated all documentation to English language
+- Fixed version consistency across all configuration files
+- Improved package build scripts and installation process
+
+## [1.1.0] - 2026-04-13
+
+### Added (v1.1.0)
 
 - **SQLite database** for storing historical data
 - **Statistics page** (`/stats`) with interactive charts (Chart.js)
